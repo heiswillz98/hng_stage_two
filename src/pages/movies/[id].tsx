@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import YouTube from "react-youtube";
+import upcoming from "../../../public/images/upcoming.png";
 
 interface Movie {
   title: string;
@@ -36,7 +37,6 @@ const MovieDetails: React.FC = () => {
   const [directors, setDirectors] = useState<string[]>([]);
   const [writers, setWriters] = useState<string[]>([]);
   const [stars, setStars] = useState<string[]>([]);
-  const [upcomingShows, setUpcomingShows] = useState<any[]>([]);
   const router = useRouter();
   const { id } = router.query;
 
@@ -298,23 +298,7 @@ const MovieDetails: React.FC = () => {
             </div>
 
             <div className="w-[360px] ml-6">
-              <div className="flex items-center  ">
-                <img
-                  src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                  alt={movie.title}
-                  className="w-[110px] h-[230]"
-                />
-                <img
-                  src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                  alt={movie.title}
-                  className="w-[110px] h-[230]"
-                />
-                <img
-                  src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                  alt={movie.title}
-                  className="w-[110px] h-[230]"
-                />
-              </div>
+              <Image src={upcoming} alt={""} />
             </div>
           </div>
         </div>

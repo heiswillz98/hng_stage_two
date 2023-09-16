@@ -107,6 +107,14 @@ const Home: React.FC = () => {
           </div>
         </div>
       )}
+      <div className=" flex items-center gap-[52rem] mt-12">
+        <h1 className="font-sans text-[36px] font-bold ml-[6rem]">
+          Featured Movie
+        </h1>
+        <h1 className="text-[#BE123C] text-[18px] font-[400]">
+          See more {">"}
+        </h1>
+      </div>
 
       <div className="movie-grid">
         {loading ? (
