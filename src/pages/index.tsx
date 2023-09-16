@@ -79,8 +79,6 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      {/* <Navbar /> */}
-
       {featuredMovie && (
         <div className="relative">
           <FeaturedMovie
