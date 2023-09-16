@@ -44,8 +44,8 @@ const FeaturedMovie: React.FC<FeaturedMovieProps> = ({ voteAverage }) => {
           showStatus={false}
           showArrows={false}
         >
-          {popularMovies.map((movie) => (
-            <div>
+          {popularMovies.map((movie, index) => (
+            <div key={index}>
               <div className={styles.posterImage}>
                 <img
                   src={`https://image.tmdb.org/t/p/original${

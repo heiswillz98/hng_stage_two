@@ -196,10 +196,13 @@ const MovieDetails: React.FC = () => {
             {movie.title} • {releaseDateUTC} • PG-13 •
             {formatRuntime(movie.runtime)}
           </p>
-          {movie.genres.map((genre) => (
-            <div className="w-[84px] h-[30px] rounded-[15px] bg-[#F8E7EB] border ">
+          {movie.genres.map((genre, index) => (
+            <div
+              key={index}
+              className="w-[84px] h-[30px] rounded-[15px] bg-[#F8E7EB] border "
+            >
               <p
-                key={genre.id}
+                key={index}
                 className="font-[500] text-[15px] text-[#B91C1C] text-center mt-[2px] m-1"
               >
                 {genre.name}
