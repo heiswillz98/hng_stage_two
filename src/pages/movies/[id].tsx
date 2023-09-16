@@ -116,7 +116,7 @@ const MovieDetails: React.FC = () => {
   }
 
   return (
-    <div className="flex gap-8">
+    <div className="flex gap-8 ">
       <div className="h-[982px] w-[250px] border border-r border-[#000000] rounded-[45px]">
         <div className="flex gap-4 items-center px-2 mt-16">
           <Image src="/icons/tv.svg" alt="TV Logo" width={50} height={50} />
@@ -218,9 +218,9 @@ const MovieDetails: React.FC = () => {
         <div className="flex mt-4 w-[1198px]">
           <p
             data-testid="movie-overview"
-            className="w-[774px] text-[20px] font-[400]"
+            className="w-[774px] text-[20px] font-[400] leading-[30px]"
           >
-            Overview: {movie.overview}
+            {movie.overview}
           </p>
           <div className="ml-auto">
             <div className="flex items-center justify-center w-[360px] h-[55px] rounded-[10px] bg-[#BE123C]">
@@ -246,7 +246,7 @@ const MovieDetails: React.FC = () => {
           </div>
         </div>
 
-        <div className="">
+        <div className=" mt-4">
           <p>
             <span className="font-[400] text-[20px] text-[#333333]">
               Directors:
