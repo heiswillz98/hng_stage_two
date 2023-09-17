@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { createUseStyles } from "react-jss";
-import { fruith } from "../../assets/index";
+import { fruith, imdb } from "../../assets/index";
 
 const useStyles = createUseStyles((theme) => {
   console.log(theme, "theme");
@@ -31,7 +31,8 @@ const useStyles = createUseStyles((theme) => {
       padding: "0 .5rem",
     },
     detailsSpan: {
-      color: theme.colors.blue,
+      // color: theme.colors.blue,
+      color: "black",
       fontSize: "14px",
     },
     detalsH3: {
@@ -40,12 +41,28 @@ const useStyles = createUseStyles((theme) => {
       fontWeight: "bold",
       color: "black",
     },
+    detalsH22: {
+      color: "#9CA3AF",
+    },
 
     buttonHolder: {
       width: "30%",
       textAlign: "end",
       paddingRight: ".2rem",
       zIndex: "100",
+    },
+
+    imdb: {
+      color: "black",
+      fontSize: "14px",
+      display: "flex",
+      whiteSpace: "nowrap",
+      alignItems: "center",
+    },
+
+    rating: {
+      display: "flex",
+      gap: "9rem",
     },
 
     button: {
@@ -106,21 +123,34 @@ const MovieCard = ({
       />
       <div className={classes.desContainer}>
         <div className={classes.details}>
-          <span data-testid="popularity" className={classes.detailsSpan}>
-            {popularity}
-          </span>
+          <h3 data-testid="movie-title" className={classes.detalsH22}>
+            USA, 2018
+          </h3>
           <h3 data-testid="movie-title" className={classes.detalsH3}>
             {title}
           </h3>
+          <div className={classes.rating}>
+            <div className={classes.buttonHolder}>
+              <span data-testid="popularity" className={classes.imdb}>
+                <img src={imdb} alt="imdb" />
+                {Math.floor(popularity)}/ 100
+              </span>
+            </div>
+
+            <div className={classes.buttonHolder}>
+              <span className={classes.imdb}>
+                <img src={fruith} alt="fruith" />
+                {Math.floor(popularity)}%
+              </span>
+            </div>
+          </div>
+
           <span
             data-testid="movie-release-date"
             className={classes.detailsSpan}
           >
             {releaseDate}
           </span>
-        </div>
-        <div className={classes.buttonHolder}>
-          <img src={fruith} alt="fruith" />
         </div>
       </div>
     </div>

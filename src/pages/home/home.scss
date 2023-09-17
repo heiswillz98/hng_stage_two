@@ -13,9 +13,25 @@
     object-fit: cover;
 
     .header-des {
+      display: flex;
       padding-top: 3rem;
       padding-left: 2rem;
       h3 {
+        color: #fff;
+      }
+      p {
+        color: #fff;
+      }
+    }
+
+    .header-menu {
+      display: flex;
+      gap: 2rem;
+      padding-top: 3rem;
+      padding-left: 2rem;
+      margin-left: 40rem;
+
+      p {
         color: #fff;
       }
     }
@@ -35,6 +51,15 @@
         padding: 0.8rem 1rem;
         border-radius: 10px;
       }
+    }
+
+    .inputs {
+      background-color: transparent;
+      border: 1px solid #fff;
+    }
+
+    .inputs::placeholder {
+      color: #fff;
     }
 
     .invalid-movie {
@@ -124,4 +149,58 @@
     text-align: center;
     margin-top: 2rem;
   }
+}
+
+.posterImage {
+  height: 600px;
+}
+
+.posterImage > img {
+  margin: auto;
+  display: block;
+  width: 100%;
+}
+
+.posterImage__overlay {
+  position: absolute;
+  padding: 5rem;
+  bottom: 0px;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: flex-start;
+  background-image: linear-gradient(rgb(0, 0, 0, 0), rgb(0, 0, 0, 1));
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.posterImage__overlay:hover {
+  opacity: 1;
+}
+
+.posterImage__title {
+  font-weight: 900;
+  font-size: 4rem;
+  margin-bottom: 0.4rem;
+  text-align: left;
+}
+
+.posterImage__runtime {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.posterImage__rating {
+  margin-left: 3rem;
+}
+
+.posterImage__description {
+  font-style: italic;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  text-align: left;
+  width: 50%;
 }

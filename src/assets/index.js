@@ -10,6 +10,9 @@ import johnwick from "./johnwick.jpeg";
 import header from "./header.png";
 import fruith from "./fruith.png";
 import menu from "./Menu.png";
+import imdb from "./imdb.png";
+import projector from "./projector.png";
+import Logout from "./Logout.png";
 
 export {
   avatar,
@@ -24,4 +27,7 @@ export {
   header,
   fruith,
   menu,
+  imdb,
+  Logout,
+  projector,
 };

@@ -2,10 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Loader } from "../../component/index";
-import { calender, des, home, logo, tvshow } from "../../assets/index";
+import {
+  calender,
+  des,
+  home,
+  logo,
+  tvshow,
+  projector,
+  Logout,
+} from "../../assets/index";
 import { BiArrowBack } from "react-icons/bi";
 import { createUseStyles } from "react-jss";
 import { Toaster, toast } from "react-hot-toast";
+import YouTube from "react-youtube";
 
 const useStyles = createUseStyles((theme) => ({
   details: {
@@ -47,6 +56,17 @@ const useStyles = createUseStyles((theme) => ({
     boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
     padding: ".5rem 0",
     cursor: "pointer",
+  },
+
+  navQ: {
+    width: "170px",
+    border: "1px solid #BE123C",
+    height: "210px",
+    marginLeft: "2rem",
+    borderRadius: "20px",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
   },
 
   main: {
@@ -93,6 +113,18 @@ const useStyles = createUseStyles((theme) => ({
     fontSize: "12px",
   },
 
+  btn: {
+    width: "112px",
+    border: "1px solid",
+    borderRadius: "30px",
+    color: "#BE123C",
+    marginTop: "50px",
+  },
+
+  castLists: {
+    color: "#BE123C",
+  },
+
   savedMovieBtn: {
     padding: "0 .5rem",
     backgroundColor: "black",
@@ -125,6 +157,10 @@ const MovieDetails = () => {
   const { movie_id } = useParams();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [directors, setDirectors] = useState([]);
+  const [writers, setWriters] = useState([]);
+  const [cast, setCast] = useState([]);
+  const [trailerKey, setTrailerKey] = useState(null);
   const apiKey = process.env.REACT_APP_TMDB_KEY;
   const baseUrl = "https://api.themoviedb.org/3/movie";
   const classes = useStyles();
@@ -145,7 +181,69 @@ const MovieDetails = () => {
         console.error("Error fetching movie details:", error);
         setIsLoading(false);
       });
+    // Fetch director(s) information
+    axios
+      .get(`${baseUrl}/${movie_id}/credits?api_key=${apiKey}&language=en-US`)
+      .then((response) => {
+        // Extract director(s) from the response
+        const directors = response.data.crew.filter(
+          (crewMember) => crewMember.job === "Director"
+        );
+
+        setDirectors(directors);
+      })
+      .catch((error) => {
+        console.error("Error fetching director(s) information:", error);
+      });
+
+    // Fetch writer(s) information
+    axios
+      .get(`${baseUrl}/${movie_id}/credits?api_key=${apiKey}&language=en-US`)
+      .then((response) => {
+        // Extract writer(s) from the response
+        const writers = response.data.crew.filter(
+          (crewMember) => crewMember.department === "Writing"
+        );
+
+        setWriters(writers);
+      })
+      .catch((error) => {
+        console.error("Error fetching writer(s) information:", error);
+      });
+    axios
+      .get(`${baseUrl}/${movie_id}/credits?api_key=${apiKey}&language=en-US`)
+      .then((response) => {
+        // Extract cast from the response
+        const cast = response.data.cast;
+
+        setCast(cast);
+      })
+      .catch((error) => {
+        console.error("Error fetching cast information:", error);
+      });
+
+    // Fetch trailer information
+    axios
+      .get(`${baseUrl}/${movie_id}/videos?api_key=${apiKey}&language=en-US`)
+      .then((response) => {
+        // Find the first trailer with the type 'Trailer' (other types include 'Teaser', 'Featurette', etc.)
+        const trailer = response.data.results.find(
+          (video) => video.type === "Trailer"
+        );
+
+        // Set the trailer key if a trailer is found
+        if (trailer) {
+          setTrailerKey(trailer.key);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching trailer information:", error);
+      });
   }, [movie_id, apiKey]);
+
+  // useEffect(() => {
+  //   // Fetch movie details
+  //   axios
 
   const navigator = useNavigate();
   const toHomePage = () => {
@@ -191,12 +289,27 @@ const MovieDetails = () => {
               <span>Home</span>
             </p>
             <p className={classes.navP}>
+              <img src={projector} alt="logo" />
+              <span>Movies</span>
+            </p>
+            <p className={classes.navP}>
               <img src={tvshow} alt="logo" />
               <span>TV Series</span>
             </p>
+
             <p className={classes.navP}>
               <img src={calender} alt="logo" />
               <span>Upcoming</span>
+            </p>
+            <div className={classes.navQ}>
+              <h3>play movie quizes and earn free tickets</h3>
+              <h6>50k people are playing now</h6>
+              <span className={classes.btn}>Start playing</span>
+            </div>
+
+            <p className={classes.navP}>
+              <img src={Logout} alt="logo" />
+              <span>Logout</span>
             </p>
           </div>
           <div className={classes.main}>
@@ -207,12 +320,17 @@ const MovieDetails = () => {
               </Link>
             </p>
             <h1 data-testid="movie-title">{movie.title}</h1>
+
             <div className={classes.imgContainer}>
-              <img
-                src={`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`}
-                alt={`${movie.title} poster`}
-                className={classes.img}
-                data-testid="movie-poster"
+              <YouTube
+                videoId={trailerKey} // Replace with your trailerKey fetched from TMDb
+                opts={{
+                  width: "100%",
+                  height: "100%",
+                  playerVars: {
+                    autoplay: 0,
+                  },
+                }}
               />
             </div>
             <div>
@@ -235,6 +353,31 @@ const MovieDetails = () => {
                 <p>{movie.overview}</p>
                 <img src={des} alt="logo" />
               </div>
+            </div>
+
+            <div className={classes.director}>
+              <p>
+                <strong>Director(s):</strong>{" "}
+                <span className={classes.castLists}>
+                  {directors.map((director) => director.name).join(", ")}
+                </span>
+              </p>
+            </div>
+            <div className={classes.writers}>
+              <p>
+                <strong>Writer(s):</strong>{" "}
+                <span className={classes.castLists}>
+                  {writers.map((writer) => writer.name).join(", ")}
+                </span>
+              </p>
+            </div>
+            <div className={classes.cast}>
+              <p>
+                <strong>Cast:</strong>
+                <span className={classes.castLists}>
+                  {cast.map((actor) => actor.name).join(", ")}
+                </span>
+              </p>
             </div>
           </div>
         </div>
