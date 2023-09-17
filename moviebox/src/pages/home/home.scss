@@ -1,0 +1,127 @@
+.home {
+  width: 70%;
+  margin: 0 auto;
+  font-family: "Courier New", Courier, monospace;
+
+  @media (max-width: 900px) {
+    width: 100%;
+  }
+
+  .top-bg {
+    background-image: url("../../assets/header.png");
+    height: 300px;
+    object-fit: cover;
+
+    .header-des {
+      padding-top: 3rem;
+      padding-left: 2rem;
+      h3 {
+        color: #fff;
+      }
+    }
+
+    .input-fild {
+      width: 40%;
+      margin: 0 auto;
+      padding-top: 1rem;
+      position: relative;
+
+      @media (max-width: 900px) {
+        width: 90%;
+      }
+
+      input {
+        width: 90%;
+        padding: 0.8rem 1rem;
+        border-radius: 10px;
+      }
+    }
+
+    .invalid-movie {
+      text-align: center;
+      color: red;
+    }
+  }
+
+  .featured-movie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .see-more {
+    display: flex;
+    text-align: center;
+    color: #428bca;
+  }
+
+  .title {
+    color: #428bca;
+
+    @media (max-width: 900px) {
+      font-size: 16px;
+    }
+  }
+  .movie-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .loading {
+    position: absolute;
+    top: 3.5rem;
+    left: 45%;
+    font-size: 20px;
+    color: #fff;
+  }
+
+  .search-movies-container {
+    background-color: #fff;
+    width: 40%;
+    height: 300px;
+    position: absolute;
+    top: 5rem;
+    left: 30%;
+    overflow-y: scroll;
+    border-radius: 10px;
+
+    @media (max-width: 900px) {
+      width: 80%;
+      left: 15%;
+    }
+
+    .search-des {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem;
+
+      &:hover {
+        background-color: #e3e9f3de;
+        cursor: pointer;
+      }
+
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
+
+        @media (max-width: 900px) {
+          border-radius: 50%;
+        }
+      }
+      .titleAndDate {
+        width: 70%;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 2rem;
+  }
+}
