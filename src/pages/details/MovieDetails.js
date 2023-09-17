@@ -43,7 +43,7 @@ const useStyles = createUseStyles((theme) => ({
 
   nav: {
     width: "20%",
-    border: "1px solid #428bca",
+    border: "1px solid #000000",
     borderTopRightRadius: "20px",
     borderBottomRightRadius: "20px",
   },

@@ -13,6 +13,8 @@ import menu from "./Menu.png";
 import imdb from "./imdb.png";
 import projector from "./projector.png";
 import Logout from "./Logout.png";
+import Moviebox from "./tv.png";
+import trailer from "./trailer.png";
 
 export {
   avatar,
@@ -30,4 +32,6 @@ export {
   imdb,
   Logout,
   projector,
+  Moviebox,
+  trailer,
 };

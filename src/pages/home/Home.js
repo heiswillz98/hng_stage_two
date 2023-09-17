@@ -1,11 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Loader, MovieCard } from "../../component/index";
-import { footer } from "../../assets/index";
+import {
+  footer,
+  Moviebox,
+  trailer,
+  menu,
+  imdb,
+  fruith,
+} from "../../assets/index";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
-import { menu } from "../../assets/index";
 import "./home.scss";
 
 const Home = () => {
@@ -89,18 +95,61 @@ const Home = () => {
         <div>
           <div className="top-bg">
             <div className="header-des">
+              <div className="header-skeleton">
+                <div className="moviebox-header">
+                  <img className="moviebox-img" src={Moviebox} alt="menu" />
+                  <h1>MovieBox</h1>
+                </div>
+                <div className="input-fild">
+                  <input
+                    type="text"
+                    placeholder="Search by movie title"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    className="inputs"
+                  />
+                </div>
+                <div className="header-menu ">
+                  <p>sign in</p>
+                  <img className="menu-img" src={menu} alt="menu" />
+                </div>
+              </div>
+
               <div>
                 <h3>John wick 3:</h3>
                 <h3>Parabellum</h3>
-                {/* <h3>John Wick is on the run after killing a member of the international assassins' guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.</h3> */}
-              </div>
-              <div className="header-menu ">
-                <p>sign in</p>
-                <img src={menu} alt="menu" />
+                <div className="header-rating">
+                  <div className="img-skeleton">
+                    <span className="imdb-img">
+                      <img src={imdb} alt="menu" />
+                    </span>
+
+                    <p>86.0/100</p>
+                  </div>
+
+                  <div className="img-skeleton">
+                    <span className="fruit-img">
+                      <img src={fruith} alt="menu" />
+                    </span>
+                    <p>97%</p>
+                  </div>
+                </div>
+
+                <h3>
+                  John Wick is on the run after killing a member of the
+                  international assassins' guild, and with a $14 million price
+                  tag on his head, he is the target of hit men and women
+                  everywhere.
+                </h3>
+
+                <div className="trailers">
+                  <img src={trailer} alt="menu" />
+                  <h3>Watch Trailer</h3>
+                </div>
               </div>
             </div>
 
-            <div className="input-fild">
+            {/* <div className="input-fild">
               <input
                 type="text"
                 placeholder="Search by movie title"
@@ -108,7 +157,7 @@ const Home = () => {
                 onChange={handleSearch}
                 className="inputs"
               />
-            </div>
+            </div> */}
           </div>
           <div className="featured-movie">
             <h1 className="title">Featured Movies</h1>
